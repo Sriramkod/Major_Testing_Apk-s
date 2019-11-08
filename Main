@@ -1,0 +1,48 @@
+package com.example.ksriram.loginusingmysql;
+
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.HashMap;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText Email, Password;
+    Button LogIn ;
+    String PasswordHolder, EmailHolder;
+    String finalResult ;
+    String HttpURL = "https://8f8ef507.ngrok.io/chintu/UserLogin.php";
+    Boolean CheckEditText ;
+    ProgressDialog progressDialog;
+    HashMap<String,String> hashMap = new HashMap<>();
+
+    public static final String UserEmail = "";
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Email = (EditText)findViewById(R.id.email);
+        Password = (EditText)findViewById(R.id.password);
+        LogIn = (Button)findViewById(R.id.Login);
+
+        LogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String username = Email.getText().toString();
+                String password = Password.getText().toString();
+                String type = "login";
+                BackgroundWorker backgroundworker = new BackgroundWorker(MainActivity.this);
+                backgroundworker.execute(type,username,password);
+
+            }
+        });
+    }
+
+    }
+
